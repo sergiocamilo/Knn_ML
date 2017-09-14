@@ -30,6 +30,11 @@ public class Iris
         this.petalWidth = petalWidth;
         this.variety = variety;
     }
+
+    @Override
+    public String toString() {
+        return "Iris{" + "sepalLength=" + sepalLength + ", sepalWidth=" + sepalWidth + ", petalLength=" + petalLength + ", petalWidth=" + petalWidth + ", variety=" + variety + '}';
+    }
     
     
     

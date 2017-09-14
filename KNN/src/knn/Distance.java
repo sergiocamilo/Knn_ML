@@ -30,6 +30,11 @@ public class Distance {
         this.distance = distance;
         this.variety = variety;
     }
+
+    @Override
+    public String toString() {
+        return "Distance{" + "index=" + index + ", distance=" + distance + ", variety=" + variety + '}';
+    }
     
     
     

@@ -19,11 +19,12 @@ public class KNN {
 
     void Classify() {
         double distance;
-        Distance[] shortDist = new Distance[k + 1];
+        Distance[] shortDist = new Distance[k];
+        
 
         for (int i = 0; i < test.length; i++) {
             for (int j = 0; j < train.length; j++) {
-                distance = Distance(train[i], test[j]);
+                distance = Distance(test[i], train[j]);
 
                 if (j < k) {
                     shortDist[j] = new Distance(j,distance, train[j].variety);
@@ -37,19 +38,20 @@ public class KNN {
                             break;
                         }
                     }
+                    
                 }
 
             }
-            
             classifyVote(i, shortDist);
-
+            
         }
     }
 
     private double Distance(Iris i1, Iris i2) {
         //i1 train
         //i2 test
-
+        
+        
         return Math.sqrt(Math.pow((i1.petalLength - i2.petalLength), 2)
                 + Math.pow((i1.petalWidth - i2.petalWidth), 2)
                 + Math.pow((i1.sepalLength - i2.sepalLength), 2)
@@ -69,35 +71,48 @@ public class KNN {
                         countSet++;
                         break;
                     case 2://virginica
-                        countVir++;
+                        countVer++;
                         break;
                     case 3://versicolor
-                        countVer++;
+                        countVir++;
                         break;
             }
         }
+        
+//        System.out.println("i"+ i);
+//        System.out.println("ver"+countVer);        
+//        System.out.println("vir"+countVir);
+//        System.out.println("set"+countSet);
+//        System.out.println("");
+
+
 
         //Cual ocurre más veces
-        if (countSet > countVer && countSet > countVir) 
+        if (countSet >= countVer && countSet >= countVir) 
         {
             resultTest[i].variety = 1;//setosa
         } 
-        else if (countVer > countSet && countVer > countVir) 
+        else if (countVer >= countSet && countVer >= countVir) 
         {
             resultTest[i].variety = 2;//virginica
         } 
-        else if (countVir > countVer && countVir > countSet) 
+        else if (countVir >= countVer && countVir >= countSet) 
         {
             resultTest[i].variety = 3;//versicolor
         }
 
     }
     
-    public void CalculateCertain(){
+    public double CalculateCertain(){
         int[][] CertainMatrix = new int[3][3];
         
         
+        
         for (int i = 0; i < 15; i++) {
+//            System.out.println("test "+"i"+i+" "+ test[i].toString());
+//           System.out.println("result: "+"i"+i+" "+ resultTest[i].toString());
+//            System.out.println("");
+
             if (test[i].variety == 1) {
                 CertainMatrix[0][resultTest[i].variety-1]++;
             }
@@ -108,6 +123,18 @@ public class KNN {
                 CertainMatrix[2][resultTest[i].variety-1]++;
             }
         }
+        
+        double certainValue = (CertainMatrix[0][0]+ CertainMatrix[1][1]+
+                CertainMatrix[2][2])/15.0;
+        
+//        for (int i = 0; i < 3; i++) {
+//            for (int j = 0; j < 3; j++) {
+//                System.out.print(CertainMatrix[i][j]+ " ");
+//            }
+//            System.out.println("");
+//        }
+        //System.out.println("Certeza: " + certainValue);
+        return certainValue;
     }
     
 

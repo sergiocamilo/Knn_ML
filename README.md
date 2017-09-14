@@ -1,1 +1,19 @@
 # Knn_ML
+
+Ejecutar en netbeans
+
+Conjunto iris en ruta /Knn/src/knn/iris.csv
+
+ejemplo de salida
+
+--KNN iris--
+Avg k= 1: 0.9800000000000001
+Avg k= 2: 0.9600000000000002
+Avg k= 3: 0.9533333333333335
+Avg k= 4: 0.9466666666666667
+Avg k= 5: 0.9533333333333334
+Avg k= 6: 0.9666666666666668
+Avg k= 7: 0.9666666666666668
+Avg k= 8: 0.9600000000000002
+Avg k= 9: 0.9666666666666668
+Avg k= 10: 0.9533333333333334
